@@ -50,7 +50,7 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
                     (item) => item.thumbnail != null
                         ? _buildPortfolioChildImg(item)
                         : item.title != null
-                            ? _buildPortfolioInformation(item, size)
+                            ? _buildPortfolioTitle(item, size, bgColor)
                             : _buildPortfolioLink(item, size),
                   )
                   .toList(),
@@ -66,37 +66,52 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
     );
   }
 
-  Widget _buildPortfolioInformation(Portfolio item, Size size) {
+  Widget _buildPortfolioTitle(Portfolio item, Size size, Color bgColor) {
     return Material(
       color: Colors.transparent,
       child: Container(
         width: size.width,
+        decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(5, 5),
+                  color: Colors.black.withOpacity(0.3),
+                  blurRadius: 5.0),
+            ]),
         margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              item.title,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              SizedBox(
+                height: size.height / 10 * 2,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              item.writer,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-                decoration: TextDecoration.none,
+              Text(
+                item.title + item.title,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                item.writer,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
