@@ -1,10 +1,20 @@
+import 'package:flutter/material.dart';
+
 class Portfolio {
-  String tag;
+  String title;
+  String writer;
   String thumbnail;
+  String information;
+  String github;
+  Color backColor;
 
-  Portfolio(this.tag, this.thumbnail);
+  Portfolio(
+      {this.title,
+      this.writer,
+      this.thumbnail,
+      this.github,
+      this.information,
+      this.backColor});
 
-  Portfolio.fromMap(Map<String, dynamic> map)
-      : tag = map['tag'],
-        thumbnail = map['thumbnail'];
+  Portfolio.fromMap(Map<String, dynamic> map) : thumbnail = map['thumbnail'];
 }

@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/common_data.dart';
 import 'package:portfolio/model/portfolio.dart';
 
 class ScreenPortfolioDetail extends StatefulWidget {
@@ -20,29 +21,137 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
   @override
   void initState() {
     super.initState();
+    _pages.add(Portfolio(title: 'Test', writer: 'Writer'));
     for (int i = 0; i < 3; i++) {
-      _pages.add(Portfolio(widget.tag, widget.thumbnail));
+      _pages.add(Portfolio(thumbnail: widget.thumbnail));
     }
+    _pages.add(Portfolio(
+        github: 'https://github.com/kmeoung', information: 'information ....'));
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Color bgColor = Colors.accents[Random().nextInt(Colors.accents.length)];
     return Scaffold(
       appBar: AppBar(
-        title: Text(LOGO_TITLE.toUpperCase()),
+        backgroundColor: bgColor,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
-      body: Center(
-        child: CarouselSlider(
-          items: _pages.map((item) => _buildPortfolioChild(item)).toList(),
-          options: CarouselOptions(
-              scrollDirection: Axis.horizontal, height: size.height / 8 * 6),
+      body: Container(
+        color: bgColor,
+        child: Center(
+          child: Hero(
+            tag: widget.tag,
+            child: CarouselSlider(
+              items: _pages
+                  .map(
+                    (item) => item.thumbnail != null
+                        ? _buildPortfolioChildImg(item)
+                        : item.title != null
+                            ? _buildPortfolioInformation(item, size)
+                            : _buildPortfolioLink(item, size),
+                  )
+                  .toList(),
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                scrollDirection: Axis.horizontal,
+                height: size.height / 8 * 6.3,
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildPortfolioChild(Portfolio item) {
+  Widget _buildPortfolioInformation(Portfolio item, Size size) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        width: size.width,
+        margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              item.title,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              item.writer,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPortfolioLink(Portfolio item, Size size) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        width: size.width,
+        margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Github Link : ',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              item.github,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              item.information,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 포트폴리오 이미지
+  Widget _buildPortfolioChildImg(Portfolio item) {
     return Column(
       children: [
         Expanded(
@@ -57,15 +166,9 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
                       color: Colors.black.withOpacity(0.3),
                       blurRadius: 5.0),
                 ]),
-            margin: EdgeInsets.symmetric(horizontal: 5.0),
+            margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
           ),
         ),
-        Text('Writer'),
-        SizedBox(
-          height: 3.0,
-        ),
-        Text(
-            'lalablahlalablahlalablahlalablahlalablahlalablahlalablahlalablahlalablahlalablahlalablahlalablah')
       ],
     );
   }
