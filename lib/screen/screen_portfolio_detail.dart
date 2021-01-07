@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/model/portfolio.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScreenPortfolioDetail extends StatefulWidget {
   final tag;
@@ -117,6 +118,9 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
     );
   }
 
+  ///
+  /// 포트폴리오 링크
+  ///
   Widget _buildPortfolioLink(Portfolio item, Size size) {
     return Material(
       color: Colors.transparent,
@@ -138,14 +142,19 @@ class _ScreenPortfolioDetailState extends State<ScreenPortfolioDetail> {
             SizedBox(
               height: 20,
             ),
-            Text(
-              item.github,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-                decoration: TextDecoration.none,
+            InkWell(
+              child: Text(
+                item.github,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                ),
               ),
+              onTap: () {
+                launch(item.github);
+              },
             ),
             SizedBox(
               height: 20,

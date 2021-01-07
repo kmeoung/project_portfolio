@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/common_data.dart';
+import 'package:portfolio/screen/screen_add_portfolio.dart';
 import 'package:portfolio/widget/main_portfolio_item.dart';
 
 class ScreenMain extends StatefulWidget {
@@ -44,7 +45,14 @@ class _ScreenMainState extends State<ScreenMain> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ScreenAddPortfolio(),
+            ),
+          );
+        },
       ),
     );
   }
