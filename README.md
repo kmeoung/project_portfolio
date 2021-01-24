@@ -1,16 +1,10 @@
 # portfolio
 
-A new Flutter project.
+프로젝트 포트폴리오
 
-## Getting Started
+모두의 포트폴리오를 앱 & 웹에서 뽐내보자 하는 프로젝트
+개발자들이 사용하는 Github는 너무 개발자가 보기 편하다는 개인적인 생각을 가지고 있었습니다.
 
-This project is a starting point for a Flutter application.
+그래서 생각한게 바로 프로젝트 포트폴리오
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+자신이 만들었던 프로그램들 및 디자인을 편하게 공유해봅시다.

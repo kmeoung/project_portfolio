@@ -66,12 +66,7 @@ class _ScreenAddPortfolioState extends State<ScreenAddPortfolio> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title),
-          SizedBox(
-            height: 5,
-          ),
           TextField(
-            style: TextStyle(backgroundColor: _curSelectedColor.shade100),
             keyboardType: (multiLine) ? TextInputType.multiline : null,
             cursorColor: Colors.black,
             decoration: InputDecoration(
@@ -85,6 +80,8 @@ class _ScreenAddPortfolioState extends State<ScreenAddPortfolio> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               hintText: hint,
+              labelText: hint,
+              labelStyle: TextStyle(color: Colors.black),
             ),
             controller: controller,
           )
